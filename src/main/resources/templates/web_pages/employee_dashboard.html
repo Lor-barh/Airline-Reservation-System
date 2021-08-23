@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beautiful Bootstrap Navbar with Menu Icons</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: #eeeeee;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .form-inline {
+            display: inline-block;
+        }
+
+        .navbar {
+            color: #fff;
+            background: #926dde;
+            padding: 5px 16px;
+            border-radius: 0;
+            border: none;
+            box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+        }
+
+        .navbar img {
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            margin-right: 10px;
+        }
+
+        .navbar .navbar-brand {
+            color: #efe5ff;
+            padding-left: 0;
+            padding-right: 50px;
+            font-size: 24px;
+        }
+
+        .navbar .navbar-brand:hover,
+        .navbar .navbar-brand:focus {
+            color: #fff;
+        }
+
+        .navbar .navbar-brand i {
+            font-size: 25px;
+            margin-right: 5px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding-right: 35px;
+            min-height: 38px;
+            border: none;
+            background: #faf7fd;
+            border-radius: 3px !important;
+        }
+
+        .search-box input:focus {
+            background: #fff;
+            box-shadow: none;
+        }
+
+        .search-box .input-group-addon {
+            min-width: 35px;
+            border: none;
+            background: transparent;
+            position: absolute;
+            right: 0;
+            z-index: 9;
+            padding: 10px 7px;
+            height: 100%;
+        }
+
+        .search-box i {
+            color: #a0a5b1;
+            font-size: 19px;
+        }
+
+        .navbar ul li i {
+            font-size: 18px;
+        }
+
+        .navbar .nav-item span {
+            position: relative;
+            top: 3px;
+        }
+
+        .navbar .nav>li a {
+            color: #efe5ff;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .navbar .nav>li a:hover,
+        .navbar .nav>li a:focus {
+            color: #fff;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar .nav>li>a>i {
+            display: block;
+            text-align: center;
+        }
+
+        .navbar .dropdown-menu i {
+            font-size: 16px;
+            min-width: 22px;
+        }
+
+        .navbar .dropdown-menu .material-icons {
+            font-size: 21px;
+            line-height: 16px;
+            vertical-align: middle;
+            margin-top: -2px;
+        }
+
+        .navbar .dropdown.open>a,
+        .navbar .dropdown.open>a:hover,
+        .navbar .dropdown.open>a:focus {
+            color: #fff;
+            background: none !important;
+        }
+
+        .navbar .dropdown-menu {
+            border-radius: 1px;
+            border-color: #e5e5e5;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .navbar .dropdown-menu li a {
+            color: #777 !important;
+            padding: 8px 20px;
+            line-height: normal;
+        }
+
+        .navbar .dropdown-menu li a:hover,
+        .navbar .dropdown-menu li a:focus {
+            color: #333 !important;
+            background: transparent !important;
+        }
+
+        .navbar .nav .active a,
+        .navbar .nav .active a:hover,
+        .navbar .nav .active a:focus {
+            color: #fff;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+            background: transparent !important;
+        }
+
+        .navbar .nav .user-action {
+            padding: 9px 15px;
+        }
+
+        .navbar .navbar-toggle {
+            border-color: #fff;
+        }
+
+        .navbar .navbar-toggle .icon-bar {
+            background: #fff;
+        }
+
+        .navbar .navbar-toggle:focus,
+        .navbar .navbar-toggle:hover {
+            background: transparent;
+        }
+
+        .navbar .navbar-nav .open .dropdown-menu {
+            background: #faf7fd;
+            border-radius: 1px;
+            border-color: #faf7fd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .navbar .divider {
+            background-color: #e9ecef !important;
+        }
+
+        @media (min-width: 1200px) {
+            .form-inline .input-group {
+                width: 350px;
+                margin-left: 30px;
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .navbar .nav>li>a>i {
+                display: inline-block;
+                text-align: left;
+                min-width: 30px;
+                position: relative;
+                top: 4px;
+            }
+
+            .navbar .navbar-collapse {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .navbar .navbar-form {
+                border: none;
+                display: block;
+                margin: 10px 0;
+                padding: 0;
+            }
+
+            .navbar .navbar-nav {
+                margin: 8px 0;
+            }
+
+            .navbar .navbar-toggle {
+                margin-right: 0;
+            }
+
+            .input-group {
+                width: 100%;
+            }
+        }
+
+        table.table tr th,
+        table.table tr td {
+            border-color: #e9e9e9;
+        }
+
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+
+        .table-wrapper {
+            background: #fff;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .pagination {
+            margin: 10px 0 5px;
+        }
+
+        .pagination li a {
+            border: none;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 4px !important;
+            text-align: center;
+            padding: 0;
+        }
+
+        .pagination li a:hover {
+            color: #666;
+        }
+
+        .pagination li.active a,
+        .pagination li.active a.page-link {
+            background: #59bdb3;
+        }
+
+        .pagination li.active a:hover {
+            background: #45aba0;
+        }
+
+        .pagination li:first-child a,
+        .pagination li:last-child a {
+            padding: 0 10px;
+        }
+
+        .pagination li.disabled a {
+            color: #ccc;
+        }
+
+        .pagination li i {
+            font-size: 17px;
+            position: relative;
+            top: 1px;
+            margin: 0 2px;
+        }
+
+        #attendance-form,
+        #leave-form {
+            margin: 14% auto;
+            float: none;
+            display: grid;
+            grid-template-columns: auto;
+
+
+        }
+
+        #leave-table {
+            margin: 14% auto;
+            float: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-expand-xl navbar-dark">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><i class="fa fa-cube"></i>SAULTECH</a>
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="navbar-toggler-icon"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <form class="navbar-form form-inline">
+                <div class="input-group search-box">
+                    <input type="text" id="search" class="form-control" placeholder="Search here...">
+                    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#"><i class="fa fa-home"></i><span>Home</span></a></li>
+                <li class="nav-item"><a class="attendance" href="#"><i class="fa fa-calendar-check"></i><span>Mark Attendance</span></a></li>
+                <li class="nav-item"><a href="#" class="leave"><i class="fa fa-plane-departure"></i><span>Apply for leave</span></a></li>
+                <li class="nav-item"><a href="#"><i class="fa fa-money-check-alt"></i><span>Payment History</span></a></li>
+                <li class="nav-item"><a class="leave-access" href="#"><i class="fa fa-briefcase"></i><span>Leave History</span></a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i><span>Messages</span></a></li>
+                <li><a href="#"><i class="fa fa-bell"></i><span>Notifications</span></a></li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> Antonio Moreno <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user-o"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-calendar-o"></i> Calendar</a></li>
+                        <li><a href="#"><i class="fa fa-sliders"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <form class="row col-lg-6 col-md-8 col-sm-10 g-3 align-items-center" id="attendance-form" style="display: none">
+        <h3>MARK ATTENDANCE</h3>
+        <div class="form-group col-6">
+            <label class="form-label" for="sign-in-token">Sign in Token:</label>
+
+            <input class="form-control" type="text" id="sign-in-token" name="sign-in-token">
+        </div>
+
+        <div class="form-group col-6">
+            <label class="form-label" for="sign-in-time">Sign in Time:</label>
+
+            <input class="form-control" type="datetime-local" id="sign-in-time" name="sign-in-time">
+        </div>
+
+
+
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary col-6">Submit</button>
+        </div>
+    </form>
+
+
+
+    <form class="row col-lg-6 col-md-8 col-sm-10 g-3 align-items-center" id="leave-form">
+        <h3>APPLICATION FOR LEAVE</h3>
+
+        <div class="form-group col-6">
+            <label class="form-label" for="starting-time">Starting time:</label>
+
+            <input class="form-control" type="date" id="starting-time" name="starting-time">
+        </div>
+        <div class="form-group col-6">
+            <label class="form-label" for="return-time">Return time:</label>
+
+            <input class="form-control" type="date" id="return-time" name="return-time">
+        </div>
+
+
+
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </form>
+
+
+
+
+
+    <div class="container col-6" id="leave-table">
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date Applied</th>
+                        <th>Leave Starting Time</th>
+                        <th>Leave Ending Time</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Thomas Hardy</td>
+                        <td>89 Chiaroscuro Rd.</td>
+                        <td>Portland</td>
+                        <td>97219</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Maria Anders</td>
+                        <td>Obere Str. 57</td>
+                        <td>Berlin</td>
+                        <td>12209</td>
+
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Fran Wilson</td>
+                        <td>C/ Araquil, 67</td>
+                        <td>Madrid</td>
+                        <td>28023</td>
+
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Dominique Perrier</td>
+                        <td>25, rue Lauriston</td>
+                        <td>Paris</td>
+                        <td>75016</td>
+
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Martin Blank</td>
+                        <td>Via Monte Bianco 34</td>
+                        <td>Turin</td>
+                        <td>10100</td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a href="#"><i class="fa fa-long-arrow-left"></i> Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next <i class="fa fa-long-arrow-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#leave-form").hide();
+            $("#attendance-form").show();
+            $("#leave-table").hide();
+            $(".nav-item .leave").click(function() {
+                $("#leave-form").show();
+                $("#attendance-form").hide();
+            });
+            $(".nav-item .attendance").click(function() {
+                $("#leave-form").hide();
+                $("#attendance-form").show();
+            });
+            $(".nav-item .leave-access").click(function() {
+                $("#leave-form").hide();
+                $("#attendance-form").hide();
+                $("#leave-table").show();
+            });
+
+        });
+    </script>
+
+
+</body></html>
