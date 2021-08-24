@@ -1,12 +1,8 @@
 package com.ars.airlinereservationsystem.controller;
 
-import com.ars.airlinereservationsystem.repositories.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class AdminController {
-
-    @Autowired
-    private PersonRepository personRepository;
-
 
 }

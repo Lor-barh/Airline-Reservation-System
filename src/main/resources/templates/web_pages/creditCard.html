@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Credit Card</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,14 +16,32 @@
             color: #000;
             overflow-x: hidden;
             height: 100%;
-            background-color: #EF5350;
+            /*background-color: #ecc77c;*/
             background-repeat: no-repeat
         }
+.back{
+    position: relative;
+    background-image: url("background.jpg");
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.back::before{
+    position: absolute;
+    content: '';
 
+
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+
+}
         .card {
             padding: 30px 25px 35px 50px;
             border-radius: 30px;
-            box-shadow: 0px 4px 8px 0px #B71C1C;
+            box-shadow: 0px 4px 8px 0px #282727;
             margin-top: 50px;
             margin-bottom: 50px
         }
@@ -117,7 +136,7 @@
 </head>
 
 <body>
-    <div class="container-fluid px-1 px-md-2 px-lg-4 py-5 mx-auto">
+    <div class="container-fluid px-1 px-md-2 px-lg-4 py-5 mx-auto back">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
                 <div class="card border-0">

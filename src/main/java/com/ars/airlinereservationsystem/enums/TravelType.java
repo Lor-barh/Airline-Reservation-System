@@ -1,5 +1,6 @@
 package com.ars.airlinereservationsystem.enums;
 
-public enum Role {
-    ADMIN,PASSENGER
+public enum TravelType {
+    ONE_WAY,
+    RETURN
 }
