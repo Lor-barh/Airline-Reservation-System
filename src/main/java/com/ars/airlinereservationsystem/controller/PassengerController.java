@@ -5,6 +5,8 @@ import com.ars.airlinereservationsystem.repositories.PassengerRepository;
 import com.ars.airlinereservationsystem.service.PassengerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,17 +22,11 @@ public class PassengerController {
         this.passengerServices = passengerServices;
     }
 
-    @RequestMapping("/registration")
-    public String passengerRegistration(@ModelAttribute("registration")Passenger passenger){
-        Passenger newPassenger = new Passenger();
-        newPassenger.setFirstName(passenger.getFirstName());
-        newPassenger.setLastName(passenger.getLastName());
-        newPassenger.setEmail(passenger.getEmail());
-        newPassenger.setPassword(passenger.getPassword());
-        newPassenger.setAddress(passenger.getAddress());
-        newPassenger.setContact(passenger.getContact());
-        newPassenger.setRole(passenger.getRole());
-        passengerServices.save(newPassenger);
-        return "redirect:/passenger_dashboard";
-    }
+//    @GetMapping("/")
+//    public String viewLandingPage(Model model){
+//        model.addAttribute("landing_page");
+//        return "index";
+//    }
+
+
 }

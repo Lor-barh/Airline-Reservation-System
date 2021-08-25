@@ -3,7 +3,12 @@ package com.ars.airlinereservationsystem.service;
 import com.ars.airlinereservationsystem.models.Passenger;
 import com.ars.airlinereservationsystem.models.Person;
 
-public interface PassengerServices {
+import javax.servlet.http.HttpSession;
 
-    Person save(Passenger passenger);
+public interface PassengerServices {
+    String register(Passenger passenger);
+    String login(Passenger passenger, HttpSession session);
+    void logout(Passenger passenger);
+    Passenger updateProfile(Passenger passenger);
+    Passenger bookFlight();
 }

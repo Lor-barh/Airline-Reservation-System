@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
@@ -17,20 +18,13 @@ import javax.validation.constraints.Size;
 @MappedSuperclass
 public class Person {
 
-    @NotNull
-    @Size(min = 3, max = 50)
+
     private String firstName;
-    @NotNull
-    @Size(min = 3, max = 50)
     private String lastName;
-    @NotNull
-    @Email(message = "{invalid.email}")
+    @Column(unique = true)
     private String email;
-    @NotNull
-    @Size(min = 8, max = 50)
     private String password;
     private String address;
     private String contact;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
 }
