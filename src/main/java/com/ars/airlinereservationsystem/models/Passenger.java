@@ -3,10 +3,7 @@ package com.ars.airlinereservationsystem.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +13,7 @@ import java.util.Set;
 public class Passenger extends Person{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer passengerId;
 
     @ManyToMany

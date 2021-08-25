@@ -17,5 +17,5 @@ public class Airplane {
     private Integer capacity;
 
    @ManyToOne
-    private Airplane airplane;
+    private Airline airline;
 }

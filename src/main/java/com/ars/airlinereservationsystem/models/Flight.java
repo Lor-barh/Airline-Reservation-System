@@ -1,10 +1,13 @@
 package com.ars.airlinereservationsystem.models;
 
+import com.ars.airlinereservationsystem.enums.TravelClass;
+import com.ars.airlinereservationsystem.enums.TravelType;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -20,8 +23,12 @@ public class Flight {
     private String Status;
     private String source;
     private String destination;
-    private LocalTime departure_time;
-    private LocalTime return_time;
+//    private LocalTime departureBoardingTime;
+//    private LocalTime returnBoardingTime;
+    private TravelType travelType;
+    private TravelClass travelClass;
+    private LocalDateTime departure_time;
+    private LocalDateTime return_time;
     private String duration;
     private Integer total_seats;
     private Double price;
