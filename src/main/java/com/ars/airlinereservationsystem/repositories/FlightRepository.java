@@ -1,5 +1,7 @@
 package com.ars.airlinereservationsystem.repositories;
 
+import com.ars.airlinereservationsystem.enums.TravelClass;
+import com.ars.airlinereservationsystem.enums.TravelType;
 import com.ars.airlinereservationsystem.models.Airline;
 import com.ars.airlinereservationsystem.models.Flight;
 import com.ars.airlinereservationsystem.models.Passenger;
@@ -7,7 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -23,10 +27,10 @@ public interface FlightRepository extends JpaRepository<Flight,Integer> {
     private String duration;
     private Integer total_seats;
     private Double price;
-
     @ManyToOne
     private Airline airline;
     @OneToMany
     private Set<Passenger> passengers;*/
-    List<Flight> findAllBySourceOrDestinationOrDeparture_timeOrReturn_time(Flight flight);
+    //AndDeparture_timeAndReturn_time
+    List<Flight> findAllBySourceAndDestinationAndTravelDateAndAndComingBackDateAndTravelTypeAndTravelClass(String source, String destination, Date travelDate,Date comingBackDate,TravelType travelType, TravelClass travelClass);
 }

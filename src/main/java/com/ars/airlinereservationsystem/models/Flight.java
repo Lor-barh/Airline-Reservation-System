@@ -2,17 +2,19 @@ package com.ars.airlinereservationsystem.models;
 
 import com.ars.airlinereservationsystem.enums.TravelClass;
 import com.ars.airlinereservationsystem.enums.TravelType;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Flight {
     @Id
@@ -23,14 +25,14 @@ public class Flight {
     private String Status;
     private String source;
     private String destination;
-//    private LocalTime departureBoardingTime;
-//    private LocalTime returnBoardingTime;
+    private Date travelDate;
+    private Date comingBackDate;
+    private LocalTime departureTime;
+    private LocalTime returnTime;
     private TravelType travelType;
     private TravelClass travelClass;
-    private LocalDateTime departure_time;
-    private LocalDateTime return_time;
     private String duration;
-    private Integer total_seats;
+    private Integer totalSeats;
     private Double price;
 
     @ManyToOne
