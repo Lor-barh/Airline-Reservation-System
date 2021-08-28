@@ -7,6 +7,7 @@ import com.ars.airlinereservationsystem.service.BookingServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,10 @@ public class BookingServicesImpl implements BookingServices {
         } else
             throw new ResourceNotFoundException("Booking with booking-id " + bookingId + "not found");
         return booking;
+    }
+
+    @Override
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
     }
 }

@@ -1,6 +1,7 @@
 package com.ars.airlinereservationsystem.controller;
 
 import com.ars.airlinereservationsystem.models.Booking;
+import com.ars.airlinereservationsystem.models.Passenger;
 import com.ars.airlinereservationsystem.service.BookingServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,18 +11,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class BookingController {
 
     @Autowired
     BookingServices bookingServices;
 
-    @GetMapping("/createBooking")
-    public String showBookingList(Model model){
+    @GetMapping("/homepage")
+    public String showHomePage(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Passenger passengerSession = (Passenger) session.getAttribute("passenger");
+        model.addAttribute("passenger_homepage",passengerSession);
+        return "passenger_homepage";
+    }
 
-        Booking booking = new Booking();
-        model.addAttribute("booking", booking);
-        return "bookingList";
+    @GetMapping("/viewBookingHistory")
+    public String showBookingList(Model model){
+        model.addAttribute("bookingList", bookingServices.getAllBookings());
+        return "passenger-dashboard";
     }
 
     @RequestMapping("/saveBooking")
@@ -30,23 +40,22 @@ public class BookingController {
         newBooking.setFlight(booking.getFlight());
         newBooking.setPassenger(booking.getPassenger());
         bookingServices.saveBooking(newBooking);
-        return "redirect:/passengerLogin";
+        return "redirect:/createBooking";
     }
 
     @GetMapping("/cancel/{bookingId}")
     public String cancelFlight(@PathVariable(name = "bookingId") Integer bookingId, Model model) {
 
         this.bookingServices.cancelFlight(bookingId);
-        return "bookingList";
+        return "redirect:/createBooking";
     }
 
     @GetMapping("/reschedule/{bookingId}")
     public String rescheduleFlight(@PathVariable (name = "bookingId") Integer bookingId, Model model){
 
         Booking booking = bookingServices.rescheduleFlight(bookingId);
-        //set employee as a model attribute to pre-populate the form
         model.addAttribute("booking", booking);
-        return "redirect:/";
+        return "redirect:/createBooking";
     }
 
 }
