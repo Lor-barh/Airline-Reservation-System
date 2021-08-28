@@ -8,4 +8,6 @@ public interface BookingServices {
     List<Booking> getAllBooking();
     Booking getBookingById(Integer bookingId);
     void deleteBookingById(Integer bookingId);
+    void cancelBooking(Integer flightId);
+    void rescheduleFlight(Booking booking);
 }

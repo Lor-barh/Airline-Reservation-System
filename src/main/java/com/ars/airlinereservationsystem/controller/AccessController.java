@@ -37,6 +37,8 @@ public class AccessController {
         //model.addAttribute("airlineData",new Airline());
         model.addAttribute("passengerData", new Passenger());
         model.addAttribute("flightData", new Flight());
+        model.addAttribute("flightBookingData", new Flight());
+        model.addAttribute("flightSearchData", new SearchBean());
         System.out.println(flightServices.getAllFlights());
         model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
         return "index";

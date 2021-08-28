@@ -33,4 +33,15 @@ public class BookingServicesImpl implements BookingServices {
     public void deleteBookingById(Integer bookingId) {
         bookingRepository.deleteById(bookingId);
     }
+
+    @Override
+    public void cancelBooking(Integer flightId) {
+        bookingRepository.deleteById(flightId);
+
+    }
+
+    @Override
+    public void rescheduleFlight(Booking booking) {
+        bookingRepository.save(booking);
+    }
 }
