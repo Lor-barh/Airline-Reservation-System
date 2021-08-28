@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <!-- Required meta tags-->
@@ -10,7 +10,7 @@
   <meta name="keywords" content="Colorlib Templates">
 
   <!-- Title Page-->
-  <title>Au Register Forms by Colorlib</title>
+  <title>Flight Registration</title>
 
   <!-- Icons font CSS-->
   <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -33,40 +33,24 @@
       <div class="card-heading"></div>
       <div class="card-body">
         <h2 class="title">Flight Info</h2>
-        <form method="POST">
-
-          <div class="input-group">
-            <div class="rs-select2 js-select-simple select--no-search">
-              <select name="class">
-                <option disabled="disabled" selected="selected">FROM</option>
-                <option>Lagos</option>
-                <option>Abuja</option>
-                <option>London</option>
-              </select>
-              <div class="select-dropdown"></div>
-            </div>
-          </div>
-
-          <div class="input-group">
-            <div class="rs-select2 js-select-simple select--no-search">
-              <select name="class">
-                <option disabled="disabled" selected="selected">TO</option>
-                <option>Lagos</option>
-                <option>Abuja</option>
-                <option>London</option>
-              </select>
-              <div class="select-dropdown"></div>
-            </div>
-          </div>
+        <form method="post" th:action="@{/createFlight}" th:object="${flightData}">
+<!--          <div class="row row-space">-->
+<!--            <div class="col-2">-->
+              <div class="input-group">
+                <input class="input--style-1" th:field="*{flightCode}" type="text" placeholder="Flight Code" name="flight_code">
+              </div>
+<!--            </div>-->
+<!--          </div>-->
 
 
           <div class="input-group">
             <div class="rs-select2 js-select-simple select--no-search">
-              <select name="class">
-                <option disabled="disabled" selected="selected">TRAVEL TYPE</option>
-                <option>One Way</option>
-                <option>Return</option>
-                <option>Multi-City</option>
+              <select name="class" th:field="*{source}">
+                <option value="" disabled="disabled" selected="selected">FROM</option>
+                <option value=""></option>
+                <option th:value="Lagos" th:text="Lagos"></option>
+                <option th:value="London" th:text="London"></option>
+                <option th:value="Abuja" th:text="Abuja"></option>
               </select>
               <div class="select-dropdown"></div>
             </div>
@@ -75,11 +59,40 @@
 
           <div class="input-group">
             <div class="rs-select2 js-select-simple select--no-search">
-              <select name="class">
-                <option disabled="disabled" selected="selected">FLIGHT CLASS</option>
-                <option>First Class</option>
-                <option>First Class Economy</option>
-                <option>Busines</option>
+              <select name="class" th:field="*{destination}">
+                <option value="" disabled="disabled" selected="selected">TO</option>
+                <option value=""></option>
+                <option th:value="Lagos" th:text="Lagos"></option>
+                <option th:value="London" th:text="London"></option>
+                <option th:value="Abuja" th:text="Abuja"></option>
+              </select>
+              <div class="select-dropdown"></div>
+            </div>
+          </div>
+
+
+          <div class="input-group">
+            <div class="rs-select2 js-select-simple select--no-search">
+              <select name="class" th:field="*{travelType}">
+                <option value="" disabled="disabled" selected="selected">TRAVEL TYPE</option>
+                <option value=""></option>
+                <option th:value="ONE_WAY" th:text="ONE_WAY"></option>
+                <option th:value="RETURN" th:text="RETURN"></option>
+                <option th:value="MULTI_CITY" th:text="MULTI_CITY"></option>
+              </select>
+              <div class="select-dropdown"></div>
+            </div>
+          </div>
+
+
+          <div class="input-group">
+            <div class="rs-select2 js-select-simple select--no-search">
+              <select name="class" th:field="*{travelClass}">
+                <option value="" disabled="disabled" selected="selected">FLIGHT CLASS</option>
+                <option value=""></option>
+                <option th:value="FIRST_CLASS" th:text="FIRST_CLASS"></option>
+                <option th:value="ECONOMY_CLASS" th:text="ECONOMY_CLASS"></option>
+                <option th:value="BUSINESS_CLASS" th:text="BUSINESS_CLASS"></option>
               </select>
               <div class="select-dropdown"></div>
             </div>
@@ -95,13 +108,13 @@
           <div class="row row-space">
             <div class="col-2">
               <div class="input-group">
-                <input class="input--style-1 js-datepicker" type="text" placeholder="DEPARTURE DATE" name="birthday">
+                <input class="input--style-1 js-datepicker" th:field="*{travelDate}" type="text" placeholder="DEPARTURE DATE" name="travelData">
                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
               </div>
             </div>
             <div class="col-2">
               <div class="input-group">
-                <input class="input--style-1 js-datepicker" type="text" placeholder="ARRIVAL DATE" name="birthday">
+                <input class="input--style-1 js-datepicker" th:field="*{comingBackDate}" type="text" placeholder="ARRIVAL DATE" name="comingBackDate">
                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
               </div>
             </div>
@@ -112,13 +125,13 @@
           <div class="row row-space">
             <div class="col-2">
               <div class="input-group">
-                <input class="input--style-1 js-datepicker" type="time" placeholder="DEPARTURE TIME" name="birthday">
+                <input class="input--style-1 js-datepicker" th:field="*{departureTime}" type="time" placeholder="DEPARTURE TIME" name="departureTime">
                 <!--                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>-->
               </div>
             </div>
             <div class="col-2">
               <div class="input-group">
-                <input class="input--style-1 js-datepicker" type="time" placeholder="ARRIVAL TIME" name="birthday">
+                <input class="input--style-1 js-datepicker" th:field="*{returnTime}" type="time" placeholder="ARRIVAL TIME" name="arrivalTime">
                 <!--                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>-->
               </div>
             </div>
@@ -126,12 +139,11 @@
           </div>
           <div class="input-group">
             <div class="rs-select2 js-select-simple select--no-search">
-              <select name="class">
-                <option disabled="disabled" selected="selected">AIRLINE</option>
-                <option>Class 1</option>
-                <option>Class 2</option>
-                <option>Class 3</option>
-              </select>
+
+                <select th:field="*{airplane}" class="form-control" required="required">
+                  <option value="" disabled="disabled" selected="selected">AIRLINE</option>
+                  <option th:each="listOfPlanes : ${T(com.ars.airlinereservationsystem.enums.Airplane).values()}" th:value="${listOfPlanes}" th:text="${listOfPlanes}"></option>
+                </select>
               <div class="select-dropdown"></div>
             </div>
           </div>
@@ -139,25 +151,16 @@
           <div class="row row-space">
             <div class="col-2">
               <div class="input-group">
-                <input class="input--style-1" type="text" placeholder="DURATION" name="name">
+                <input class="input--style-1" th:field="*{duration}" type="text" placeholder="DURATION" name="name">
               </div>
             </div>
             <div class="col-2">
               <div class="input-group">
-                <input class="input--style-1" type="text" placeholder="PRICE" name="name">
+                <input class="input--style-1" th:field="*{price}" type="text" placeholder="PRICE" name="name">
               </div>
             </div>
           </div>
 
-          <!--
-          <div class="row row-space">
-              <div class="col-2">
-                  <div class="input-group">
-                      <input class="input--style-1" type="text" placeholder="NUMBER OF SEATS" name="res_code">
-                  </div>
-              </div>
-          </div>
--->
           <div class="p-t-20">
             <button class="btn btn--radius btn--green" type="submit">CREATE FLIGHT</button>
           </div>

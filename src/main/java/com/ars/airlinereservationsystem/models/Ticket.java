@@ -20,12 +20,10 @@ public class Ticket {
 
     @ManyToOne
     private Passenger passenger;
-
     @OneToOne
     private Flight flight;
-
-    private Integer profileId;
-    private Integer flightId;
-    private LocalDateTime flightDepartureDate;
+/*    private Integer profileId;*/
+/*    private Integer flightId;
+    private LocalDateTime flightDepartureDate;*/
     private TicketStatus status;
     }

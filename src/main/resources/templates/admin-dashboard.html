@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -750,6 +750,76 @@
         .modal form label {
             font-weight: normal;
         }
+
+        .form-control {
+            border-color: #eee;
+            min-height: 41px;
+            box-shadow: none !important;
+        }
+        .form-control:focus {
+            border-color: #5cd3b4;
+        }
+        .form-control, .btn {
+            border-radius: 3px;
+        }
+        .signup-form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        .signup-form h2 {
+            color: #333;
+            margin: 0 0 30px 0;
+            display: inline-block;
+            padding: 0 30px 10px 0;
+            border-bottom: 3px solid #5cd3b4;
+        }
+        .signup-form form {
+            color: #999;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            background: #fff;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+        .signup-form .form-group row {
+            margin-bottom: 20px;
+        }
+        .signup-form label {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 2;
+        }
+        .signup-form input[type="checkbox"] {
+            position: relative;
+            top: 1px;
+        }
+        .signup-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #5cd3b4;
+            border: none;
+            margin-top: 20px;
+            min-width: 140px;
+        }
+        .signup-form .btn:hover, .signup-form .btn:focus {
+            background: #41cba9;
+            outline: none !important;
+        }
+        .signup-form a {
+            color: #5cd3b4;
+            text-decoration: underline;
+        }
+        .signup-form a:hover {
+            text-decoration: none;
+        }
+        .signup-form form a {
+            color: #5cd3b4;
+            text-decoration: none;
+        }
+        .signup-form form a:hover {
+            text-decoration: underline;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -800,12 +870,12 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#"><i class="fa fa-home"></i><span>Home</span></a></li>
-                <li><a href="#"><i class="fa fa-gears"></i><span>Projects</span></a></li>
-                <li><a href="#"><i class="fa fa-users"></i><span>Team</span></a></li>
-                <li><a href="#"><i class="fa fa-pie-chart"></i><span>Reports</span></a></li>
-                <li><a href="#"><i class="fa fa-briefcase"></i><span>Careers</span></a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i><span>Messages</span></a></li>
-                <li><a href="#"><i class="fa fa-bell"></i><span>Notifications</span></a></li>
+                <li><a href="#"><i class="fa fa-gears"></i><span>Tickets</span></a></li>
+                <li><a href="#"><i class="fa fa-users"></i><span>Bookings</span></a></li>
+                <li><a th:href="@{/create-flight}"><i class="fa fa-pie-chart"></i><span>Create Flights</span></a></li>
+                <li><a href="#"><i class="fa fa-briefcase"></i><span>Flights</span></a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i><span>Airlines</span></a></li>
+                <li><a href="#"><i class="fa fa-bell"></i><span>Payments</span></a></li>
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> Antonio Moreno <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -1180,4 +1250,42 @@
             </div>
         </div>
     </div>
+
+
+
+<!--CREATE AIRLINES AND FLIGHTS-->
+
+
+    <div class="signup-form">
+        <form th:action="@{/addAirline}" th:object="${airlineData}" method="post" class="form-horizontal">
+            <div class="row">
+                <div class="col-8 offset-4">
+                    <h2>Create Airline</h2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Airline Name</label>
+                <div class="col-8">
+                    <input class="form-control" name="username" required="required" th:field="*{airlineName}" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Airplane Name</label>
+                <div class="col-8">
+                    <select th:field="*{airplanes}" class="form-control" required="required">
+                        <option value="" selected disabled></option>
+                        <option th:each="listOfPlanes : ${T(com.ars.airlinereservationsystem.enums.Airplane).values()}" th:value="${listOfPlanes}" th:text="${listOfPlanes}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Add Airline</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+<!--CREATE PLANE RECORD-->
 </body></html>                            
