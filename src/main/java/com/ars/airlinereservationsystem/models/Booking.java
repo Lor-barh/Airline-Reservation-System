@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 public class Booking {
 
     @Id
-    private Integer bookngId;
+    private Integer bookingId;
 
     @OneToOne
     private Flight flight;

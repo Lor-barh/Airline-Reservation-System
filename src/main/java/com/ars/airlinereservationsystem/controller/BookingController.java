@@ -30,7 +30,7 @@ public class BookingController {
 
     @GetMapping("/viewBookingHistory")
     public String showBookingList(Model model){
-        model.addAttribute("bookingList", bookingServices.getAllBookings());
+        model.addAttribute("bookingList", bookingServices.getAllBooking());
         return "passenger-dashboard";
     }
 
@@ -46,15 +46,15 @@ public class BookingController {
     @GetMapping("/cancel/{bookingId}")
     public String cancelFlight(@PathVariable(name = "bookingId") Integer bookingId, Model model) {
 
-        this.bookingServices.cancelFlight(bookingId);
+        this.bookingServices.cancelBooking(bookingId);
         return "redirect:/createBooking";
     }
 
     @GetMapping("/reschedule/{bookingId}")
     public String rescheduleFlight(@PathVariable (name = "bookingId") Integer bookingId, Model model){
 
-        Booking booking = bookingServices.rescheduleFlight(bookingId);
-        model.addAttribute("booking", booking);
+        //Booking booking = bookingServices.rescheduleFlight(bookingId);
+        //model.addAttribute("booking", booking);
         return "redirect:/createBooking";
     }
 

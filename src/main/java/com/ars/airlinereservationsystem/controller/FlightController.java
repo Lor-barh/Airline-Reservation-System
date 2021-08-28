@@ -2,6 +2,8 @@ package com.ars.airlinereservationsystem.controller;
 
 import com.ars.airlinereservationsystem.models.Airline;
 import com.ars.airlinereservationsystem.models.Flight;
+import com.ars.airlinereservationsystem.models.Passenger;
+import com.ars.airlinereservationsystem.models.SearchBean;
 import com.ars.airlinereservationsystem.service.AirlineService;
 import com.ars.airlinereservationsystem.service.FlightServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,13 @@ public class FlightController {
         this.airlineService = airlineService;
     }
     @PostMapping("/searchFlight")
-    public String searchFlights(@ModelAttribute("flightData")Flight flight, Model model){
-        model.addAttribute("flightList",flightServices.searchFlight(flight));
+    public String searchFlights(@ModelAttribute("flightSearchData") SearchBean searchBean, Model model){
+        model.addAttribute("flightData", new Flight());
+        System.out.println("=========>>>>"+searchBean.getTravelType());
+        model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
+        System.out.println(" ========= "+flightServices.searchFlight(searchBean).size());
+        model.addAttribute("flightList",flightServices.searchFlight(searchBean));
+        model.addAttribute("passengerData", new Passenger());
         return "index";
     }
     @PostMapping("/createFlight")

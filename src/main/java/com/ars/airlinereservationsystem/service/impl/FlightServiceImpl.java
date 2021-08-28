@@ -1,6 +1,7 @@
 package com.ars.airlinereservationsystem.service.impl;
 
 import com.ars.airlinereservationsystem.models.Flight;
+import com.ars.airlinereservationsystem.models.SearchBean;
 import com.ars.airlinereservationsystem.repositories.AirlineRepository;
 import com.ars.airlinereservationsystem.repositories.FlightRepository;
 import com.ars.airlinereservationsystem.service.FlightServices;
@@ -24,9 +25,21 @@ public class FlightServiceImpl implements FlightServices {
     }
 
     @Override
-    public List<Flight> searchFlight(Flight flight) {
+    public List<Flight> searchFlight(SearchBean searchBean) {
         //Departure_timeAndReturn_timeAnd
-        return flightRepository.findAllBySourceAndDestinationAndTravelDateAndAndComingBackDateAndTravelTypeAndTravelClass(flight.getSource(), flight.getDestination(),flight.getTravelDate(),flight.getComingBackDate(),flight.getTravelType(),flight.getTravelClass());
+        Flight flight = new Flight();
+        flight.setSource(searchBean.getSource());
+        flight.setDestination(searchBean.getDestination());
+        flight.setTravelDate(searchBean.getTravelDate());
+        flight.setComingBackDate(searchBean.getComingBackDate());
+        flight.setTravelType(searchBean.getTravelType());
+        flight.setTravelClass(searchBean.getTravelClass());
+ /*       flight.set(searchBean.getSource());
+        flight.setSource(searchBean.getSource());
+        flight.setSource(searchBean.getSource());
+        flight.setSource(searchBean.getSource());*/
+
+        return flightRepository.findAllBySourceOrDestinationOrTravelDateOrComingBackDateOrTravelType(flight.getSource(), flight.getDestination(),flight.getTravelDate(),flight.getComingBackDate(),flight.getTravelType());
     }
 
     @Override
