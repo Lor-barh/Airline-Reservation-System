@@ -1,3 +1,4 @@
+/*
 package com.ars.airlinereservationsystem.models;
 
 import lombok.Data;
@@ -16,6 +17,7 @@ public class Airplane {
     private String airplaneName;
     private Integer capacity;
 
-   @ManyToOne
+   @OneToOne
     private Airline airline;
 }
+*/

@@ -1,11 +1,13 @@
 package com.ars.airlinereservationsystem.service.impl;
 
 import com.ars.airlinereservationsystem.models.Admin;
+import com.ars.airlinereservationsystem.models.Airline;
 import com.ars.airlinereservationsystem.models.Passenger;
 import com.ars.airlinereservationsystem.repositories.AdminRepository;
 import com.ars.airlinereservationsystem.service.AdminServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,17 +27,19 @@ public class AdminServicesImpl implements AdminServices {
     }
 
     @Override
-    public String login(Admin admin, HttpSession session) {
-        String redirect = "";
+    public String login(Admin admin, HttpSession session, Model model) {
+        String redirect = "/admin_login";
         if(admin != null){
             Admin currentAdmin = adminRepository.findAdminByEmailAndPassword
                     (admin.getEmail(), admin.getPassword());
-
             if (currentAdmin != null){
-                session.setAttribute("passengerData", currentAdmin);
-                redirect = "redirect:/passenger_dashboard";
+                System.out.println(currentAdmin.getEmail());
+                session.setAttribute("adminData", currentAdmin);
+                redirect = "/admin-dashboard";
+                model.addAttribute("airlineData",new Airline());
+                return redirect;
             }else{
-                redirect = "index";
+                return redirect;
             }
         }
         return redirect;

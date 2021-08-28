@@ -32,5 +32,5 @@ public interface FlightRepository extends JpaRepository<Flight,Integer> {
     @OneToMany
     private Set<Passenger> passengers;*/
     //AndDeparture_timeAndReturn_time
-    List<Flight> findAllBySourceAndDestinationAndTravelDateAndAndComingBackDateAndTravelTypeAndTravelClass(String source, String destination, Date travelDate,Date comingBackDate,TravelType travelType, TravelClass travelClass);
+    List<Flight> findAllBySourceAndDestinationAndTravelDateAndAndComingBackDateAndTravelTypeAndTravelClass(String source, String destination, String travelDate,String comingBackDate,TravelType travelType, TravelClass travelClass);
 }
