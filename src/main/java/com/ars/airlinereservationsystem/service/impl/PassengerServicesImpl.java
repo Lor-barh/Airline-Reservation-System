@@ -25,7 +25,7 @@ public class PassengerServicesImpl implements PassengerServices {
         newPassenger.setAddress(passenger.getAddress());
         newPassenger.setContact(passenger.getContact());
         passengerRepository.save(newPassenger);
-        return "passenger-dashboard";
+        return "redirect:/homepage";
     }
 
     @Override
@@ -39,9 +39,9 @@ public class PassengerServicesImpl implements PassengerServices {
                 System.out.println(currentPassenger.getEmail());
                 System.out.println(currentPassenger.getPassword());
                 session.setAttribute("passengerData", currentPassenger);
-                redirect = "passenger-dashboard";
+                redirect = "passenger_homepage";
             }else{
-                redirect = "redirect:/index";
+                redirect = "index";
             }
         }
         return redirect;
