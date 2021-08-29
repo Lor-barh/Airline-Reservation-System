@@ -30,8 +30,9 @@ public class AccessController {
     }
 
     @GetMapping("/")
-    public String landingPage(Model model){
+    public String landingPage(Model model,HttpSession session){
         //model.addAttribute("airlineData",new Airline());
+        model.addAttribute("flightList",session.getAttribute("flightList"));
         model.addAttribute("passengerData", new Passenger());
         model.addAttribute("flightData", new Flight());
         model.addAttribute("flightBookingData", new Flight());
@@ -41,6 +42,8 @@ public class AccessController {
         return "index";
     }
 
+
+
     @GetMapping("/Admin")
     public String adminLogin(Model model){
         model.addAttribute("adminData", new Admin());
@@ -49,7 +52,6 @@ public class AccessController {
 
     @PostMapping("/passengerLogin")
     public String userLogin(@ModelAttribute ("passengerData") Passenger passenger, HttpSession session, Model model){
-        //model.addAttribute("passengerData", new Passenger());
         return passengerServices.login(passenger,session,model);
     }
 
@@ -65,9 +67,9 @@ public class AccessController {
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
         httpSession.removeAttribute("adminData");
+        httpSession.removeAttribute("passengerData");
         httpSession.invalidate();
-        return "admin-login";
-
+        return "redirect:/";
     }
 
 }

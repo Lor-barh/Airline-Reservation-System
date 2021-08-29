@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 public interface PassengerServices {
     String register(Passenger passenger,Model model);
-    String login(Passenger passenger, HttpSession session, Model model);
+    String login(Passenger passenger,HttpSession session, Model model);
     Passenger updateProfile(Passenger passenger);
     Passenger bookFlight();
     Passenger getAPassenger(String email,String password);

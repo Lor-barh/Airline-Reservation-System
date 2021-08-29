@@ -714,11 +714,11 @@
             </div>
             <div class="card__info">
                 <div class="title-left-wrap">
-                    <h5 th:text="${list.source.getCountry()}"></h5> <small th:text="${list.destination.getCountry()}"></small>
+                    <h5 th:text="${list.source}"></h5> <small th:text="${list.source.getCountry()}"></small>
                 </div>
                 <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
                 <div class="title-right-wrap">
-                    <h5 th:text="${list.source}"></h5> <small th:text="${list.destination}"></small>
+                    <h5 th:text="${list.destination}"></h5> <small th:text="${list.destination.getCountry()}"></small>
                 </div>
             </div> <!--  card__info //  -->
             <div class="card__pricelist">

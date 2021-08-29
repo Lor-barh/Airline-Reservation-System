@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class FlightController {
@@ -30,13 +31,20 @@ public class FlightController {
         this.flightServices = flightServices;
         this.airlineService = airlineService;
     }
+
     @PostMapping("/searchFlight")
-    public String searchFlights(@ModelAttribute("flightSearchData") SearchBean searchBean, Model model){
-        model.addAttribute("flightData", new Flight());
-        model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
-        model.addAttribute("flightList",flightServices.searchFlight(searchBean));
-        model.addAttribute("passengerData", new Passenger());
-        return "index";
+    public String searchFlights(@ModelAttribute("flightSearchData") SearchBean searchBean, Model model,HttpSession session){
+        Passenger passenger = (Passenger) session.getAttribute("passengerData");
+        session.setAttribute("flightList",flightServices.searchFlight(searchBean));
+        if(passenger!=null){
+
+
+            return "redirect:/passenger_homepage";
+
+        }
+        return "redirect:/";
+
+
     }
     @PostMapping("/createFlight")
     public String createFlight(@ModelAttribute("flightData") Flight flight,Model model){
@@ -48,6 +56,17 @@ public class FlightController {
         //model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
         airlineService.addNewAirline(airline);
         return "/admin-dashboard";
+    }
+    @GetMapping("/passenger_homepage")
+    public String passengerHomepage(@ModelAttribute("flightSearchData") SearchBean searchBean,Model model,HttpSession session){
+        model.addAttribute("flightList",session.getAttribute("flightList"));
+        model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
+        model.addAttribute("passengerData", new Passenger());
+        model.addAttribute("flightData", new Flight());
+        model.addAttribute("flightBookingData", new Flight());
+        model.addAttribute("flightSearchData", new SearchBean());
+        model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
+        return "passenger_homepage";
     }
 
 }
