@@ -46,11 +46,8 @@
           <div class="input-group">
             <div class="rs-select2 js-select-simple select--no-search">
               <select name="class" th:field="*{source}">
-                <option value="" disabled="disabled" selected="selected">FROM</option>
-                <option value=""></option>
-                <option th:value="Lagos" th:text="Lagos"></option>
-                <option th:value="London" th:text="London"></option>
-                <option th:value="Abuja" th:text="Abuja"></option>
+                <option value="" disabled>FROM</option>
+                  <option th:each="places : ${T(com.ars.airlinereservationsystem.enums.Places).values()}" th:value="${places}" th:text="${places}"></option>
               </select>
               <div class="select-dropdown"></div>
             </div>
@@ -60,11 +57,8 @@
           <div class="input-group">
             <div class="rs-select2 js-select-simple select--no-search">
               <select name="class" th:field="*{destination}">
-                <option value="" disabled="disabled" selected="selected">TO</option>
-                <option value=""></option>
-                <option th:value="Lagos" th:text="Lagos"></option>
-                <option th:value="London" th:text="London"></option>
-                <option th:value="Abuja" th:text="Abuja"></option>
+                <option value="" disabled>TO</option>
+                  <option th:each="places : ${T(com.ars.airlinereservationsystem.enums.Places).values()}" th:value="${places}" th:text="${places}"></option>
               </select>
               <div class="select-dropdown"></div>
             </div>

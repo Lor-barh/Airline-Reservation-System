@@ -31,9 +31,7 @@ public class FlightController {
     @PostMapping("/searchFlight")
     public String searchFlights(@ModelAttribute("flightSearchData") SearchBean searchBean, Model model){
         model.addAttribute("flightData", new Flight());
-        System.out.println("=========>>>>"+searchBean.getTravelType());
         model.addAttribute("listOfFlightsCreated",flightServices.getAllFlights());
-        System.out.println(" ========= "+flightServices.searchFlight(searchBean).size());
         model.addAttribute("flightList",flightServices.searchFlight(searchBean));
         model.addAttribute("passengerData", new Passenger());
         return "index";

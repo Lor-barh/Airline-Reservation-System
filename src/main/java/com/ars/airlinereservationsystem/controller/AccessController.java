@@ -52,7 +52,8 @@ public class AccessController {
 
     @PostMapping("/passengerLogin")
     public String userLogin(@ModelAttribute ("passengerData") Passenger passenger, HttpSession session, Model model){
-        return passengerServices.login(passenger,session);
+        //model.addAttribute("passengerData", new Passenger());
+        return passengerServices.login(passenger,session,model);
     }
 
     @PostMapping("/adminLogin")
@@ -61,8 +62,15 @@ public class AccessController {
     }
 
     @RequestMapping("/registration")
-    public String passengerRegistration(@ModelAttribute("registration")Passenger passenger){
-        return passengerServices.register(passenger);
+    public String passengerRegistration(@ModelAttribute("registration") Passenger passenger,Model model){
+        return passengerServices.register(passenger,model);
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession){
+        httpSession.removeAttribute("adminData");
+        httpSession.invalidate();
+        return "admin-login";
+
     }
 
 }
