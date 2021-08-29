@@ -3,6 +3,8 @@ package com.ars.airlinereservationsystem.controller;
 import com.ars.airlinereservationsystem.models.Booking;
 import com.ars.airlinereservationsystem.models.Passenger;
 import com.ars.airlinereservationsystem.service.BookingServices;
+import com.ars.airlinereservationsystem.service.FlightServices;
+import com.ars.airlinereservationsystem.service.PassengerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class BookingController {
 
-    @Autowired
     BookingServices bookingServices;
+    PassengerServices passengerServices;
+    FlightServices flightServices;
+
+    @Autowired
+    public BookingController(BookingServices bookingServices, PassengerServices passengerServices, FlightServices flightServices) {
+        this.bookingServices = bookingServices;
+        this.passengerServices = passengerServices;
+        this.flightServices = flightServices;
+    }
 
     @GetMapping("/homepage")
     public String showHomePage(Model model, HttpServletRequest request){
@@ -31,7 +41,28 @@ public class BookingController {
     @GetMapping("/viewBookingHistory")
     public String showBookingList(Model model){
         model.addAttribute("bookingList", bookingServices.getAllBooking());
-        return "passenger-dashboard";
+        return "passenger-history";
+    }
+
+    @GetMapping("/book/{flightId}")
+    public String book(@PathVariable(name = "flightId") Integer flightId, Model model, HttpSession httpSession){
+        Passenger loginPassenger = (Passenger) httpSession.getAttribute("passengerData");
+
+        if(loginPassenger!=null){
+            Passenger currentPassenger = passengerServices.getAPassenger(loginPassenger.getEmail(),loginPassenger.getPassword());
+            if(currentPassenger != null){
+                Booking newBooking = new Booking();
+                newBooking.setFlight(flightServices.getFlightById(flightId));
+                newBooking.setPassenger(currentPassenger);
+                bookingServices.saveBooking(newBooking);
+                model.addAttribute("bookingList", bookingServices.getAllBooking());
+                return "passenger_homepage";
+            }else{
+                return "index";
+            }
+        }
+        return "index";
+
     }
 
     @RequestMapping("/saveBooking")

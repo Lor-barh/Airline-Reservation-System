@@ -71,4 +71,9 @@ public class PassengerServicesImpl implements PassengerServices {
         return null;
     }
 
+    @Override
+    public Passenger getAPassenger(String email, String password) {
+        return passengerRepository.findByEmailAndPassword(email,password);
+    }
+
 }

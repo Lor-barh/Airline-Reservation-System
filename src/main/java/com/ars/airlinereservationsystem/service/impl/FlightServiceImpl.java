@@ -66,4 +66,9 @@ public class FlightServiceImpl implements FlightServices {
     public List<Flight> getAllFlights() {
         return flightRepository.findAll();
     }
+
+    @Override
+    public Flight getFlightById(Integer flightId) {
+        return flightRepository.findFlightByFlightId(flightId);
+    }
 }

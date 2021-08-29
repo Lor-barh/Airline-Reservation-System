@@ -19,4 +19,5 @@ import java.util.Set;
 
 public interface FlightRepository extends JpaRepository<Flight,Integer> {
     List<Flight> findAllBySourceOrDestinationOrTravelDateOrComingBackDateOrTravelType(Places source, Places destination, String travelDate, String comingBackDate, TravelType travelType);
+    Flight findFlightByFlightId(Integer flightId);
 }
