@@ -47,46 +47,54 @@ public class BookingController {
     @GetMapping("/book/{flightId}")
     public String book(@PathVariable(name = "flightId") Integer flightId, Model model, HttpSession httpSession){
         Passenger loginPassenger = (Passenger) httpSession.getAttribute("passengerData");
+        System.out.println("<==== not login ====>"+flightId);
 
         if(loginPassenger!=null){
+            System.out.println("<==== <> ====>"+flightId);
             Passenger currentPassenger = passengerServices.getAPassenger(loginPassenger.getEmail(),loginPassenger.getPassword());
             if(currentPassenger != null){
                 Booking newBooking = new Booking();
                 newBooking.setFlight(flightServices.getFlightById(flightId));
-                newBooking.setPassenger(currentPassenger);
+                newBooking.setPassenger(loginPassenger);
                 bookingServices.saveBooking(newBooking);
                 model.addAttribute("bookingList", bookingServices.getAllBooking());
-                return "passenger_homepage";
+                return "redirect:/viewBookingHistory";
             }else{
-                return "index";
+                return "redirect:/";
             }
         }
-        return "index";
+        return "redirect:/";
 
     }
 
-    @RequestMapping("/saveBooking")
+/*    @RequestMapping("/saveBooking")
     public String saveBooking(@ModelAttribute("booking")Booking booking){
         Booking newBooking = new Booking();
         newBooking.setFlight(booking.getFlight());
         newBooking.setPassenger(booking.getPassenger());
         bookingServices.saveBooking(newBooking);
         return "redirect:/createBooking";
-    }
+    }*/
 
     @GetMapping("/cancel/{bookingId}")
     public String cancelFlight(@PathVariable(name = "bookingId") Integer bookingId, Model model) {
 
         this.bookingServices.cancelBooking(bookingId);
-        return "redirect:/createBooking";
+        return "redirect:/viewBookingHistory";
     }
 
     @GetMapping("/reschedule/{bookingId}")
     public String rescheduleFlight(@PathVariable (name = "bookingId") Integer bookingId, Model model){
-
-        //Booking booking = bookingServices.rescheduleFlight(bookingId);
-        //model.addAttribute("booking", booking);
-        return "redirect:/createBooking";
+        bookingServices.rescheduleFlight(bookingServices.getBookingById(bookingId));
+        model.addAttribute("booking", bookingServices.getBookingById(bookingId));
+        return "redirect:/viewBookingHistory";
     }
+
+    /*@GetMapping("/reschedule/{bookingId}")
+    public String reschedule(@PathVariable (name = "bookingId") Integer bookingId, Model model){
+        model.addAttribute("booking", bookingServices.getBookingById(bookingId));
+        model.addAttribute("flightData",flightServices.getFlightById(bookingServices.getBookingById(bookingId).getFlight().getFlightId()));
+        return "reschedule_flight";
+    }*/
 
 }

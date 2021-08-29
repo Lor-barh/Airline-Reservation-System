@@ -61,7 +61,7 @@ public class AccessController {
     }
 
     @RequestMapping("/registration")
-    public String passengerRegistration(@ModelAttribute("registration") Passenger passenger,Model model){
+    public String passengerRegistration(@ModelAttribute("passengerData") Passenger passenger,Model model){
         return passengerServices.register(passenger,model);
     }
     @GetMapping("/logout")

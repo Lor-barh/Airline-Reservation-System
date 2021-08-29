@@ -713,21 +713,21 @@
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/SU.png"></div>
                     <div class="icon-wrap"> <i class="material-icons"></i> <small th:text="${list.travelDate}"></small> </div>
                     <div class="price-wrap"><var class="price" th:text="${list.price}"><span class="currency">AED</span></var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
+                        <a rel="nofollow" th:href="@{/book/{flightId}(flightId=${list.getFlightId()})}" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
                 <div class="cost">
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/PS.png"></div>
                     <div class="icon-wrap"> <i class="material-icons"></i> <small th:text="${list.comingBackDate}"></small> </div>
                     <div class="price-wrap"><var class="price" th:text="${list.price}"><span class="currency">AED</span> 1,520</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
+                        <a rel="nofollow" th:href="@{/book/{flightId}(flightId=${list.getFlightId()})}" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
                 <div class="cost">
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/EK.png"></div>
                     <div class="icon-wrap"> <i class="material-icons"></i> <small>29-Nov</small> </div>
                     <div class="price-wrap"><var class="price"><span class="currency">AED</span> 4,000</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
+                        <a rel="nofollow" th:href="@{/book/{flightId}(flightId=${list.getFlightId()})}" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
             </div> <!-- card__pricelist // -->
@@ -758,14 +758,14 @@
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/PC.png"></div>
                     <div class="icon-wrap"> <i class="material-icons"></i> <small th:text="${list.departureTime}"></small> </div>
                     <div class="price-wrap"><span class="currency">AED</span><var class="price" th:text="${list.price}"></var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
+                        <a rel="nofollow" th:href="@{/book/{flightId}(flightId=${list.getFlightId()})}" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
                 <div class="cost">
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/SV.png"></div>
                     <div class="icon-wrap"> <i class="material-icons"></i> <small>20-May</small> </div>
                     <div class="price-wrap"><var class="price"><span class="currency">AED</span> 700</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
+                        <a rel="nofollow" th:href="@{/book/{flightId}(flightId=${list.getFlightId()})}" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
                 <div class="cost">

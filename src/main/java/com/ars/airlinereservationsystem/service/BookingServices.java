@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface BookingServices {
     void saveBooking(Booking booking);
+    List<Booking> getPassengerBooking(Integer passengerId);
     List<Booking> getAllBooking();
     Booking getBookingById(Integer bookingId);
     void deleteBookingById(Integer bookingId);

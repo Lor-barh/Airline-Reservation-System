@@ -20,6 +20,11 @@ public class BookingServicesImpl implements BookingServices {
     }
 
     @Override
+    public List<Booking> getPassengerBooking(Integer passengerId) {
+        return bookingRepository.findBookingsByPassengerPassengerId(passengerId);
+    }
+
+    @Override
     public List<Booking> getAllBooking() {
         return bookingRepository.findAll();
     }

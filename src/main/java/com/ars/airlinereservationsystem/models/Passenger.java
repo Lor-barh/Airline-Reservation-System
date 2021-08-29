@@ -31,4 +31,6 @@ public class Passenger extends Person{
     @OneToMany
     private Set<Booking> bookings;
 
+    private Double wallet = 10000.0;
+
 }

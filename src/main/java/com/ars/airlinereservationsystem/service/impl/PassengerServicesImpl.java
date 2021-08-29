@@ -23,7 +23,7 @@ public class PassengerServicesImpl implements PassengerServices {
 
     @Override
     public String register(Passenger passenger,Model model) {
-        model.addAttribute("passengerData", new Passenger());
+
         Passenger newPassenger = new Passenger();
         newPassenger.setFirstName(passenger.getFirstName());
         newPassenger.setLastName(passenger.getLastName());
@@ -32,7 +32,8 @@ public class PassengerServicesImpl implements PassengerServices {
         newPassenger.setAddress(passenger.getAddress());
         newPassenger.setContact(passenger.getContact());
         passengerRepository.save(newPassenger);
-        return "redirect:/homepage";
+        model.addAttribute("passengerData", newPassenger);
+        return "redirect:/";
     }
 
     @Override
