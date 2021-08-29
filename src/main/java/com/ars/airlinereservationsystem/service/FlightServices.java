@@ -9,4 +9,5 @@ public interface FlightServices {
     List<Flight> searchFlight(SearchBean searchBean);
     void createFlight(Flight flight);
     List<Flight> getAllFlights();
+    Flight getFlightById(Integer flightId);
 }

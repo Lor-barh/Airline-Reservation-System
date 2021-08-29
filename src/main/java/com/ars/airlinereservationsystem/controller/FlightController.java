@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class FlightController {
     @GetMapping("/create-flight")
@@ -24,7 +26,7 @@ public class FlightController {
     private final FlightServices flightServices;
     private final AirlineService airlineService;
     @Autowired
-    public FlightController(FlightServices flightServices,AirlineService airlineService) {
+    public FlightController(FlightServices flightServices, AirlineService airlineService) {
         this.flightServices = flightServices;
         this.airlineService = airlineService;
     }
@@ -49,4 +51,5 @@ public class FlightController {
         airlineService.addNewAirline(airline);
         return "/admin-dashboard";
     }
+
 }

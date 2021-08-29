@@ -1182,7 +1182,7 @@
 
 
 
-    <div class="container">
+    <div class="container" th:object="${bookingList}">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -1192,7 +1192,7 @@
                         </div>
                         <div class="col-xs-6">
 <!--                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Booking</span></a>-->
-                            <a th:href="@{/cancel/{bookingId}(bookingId=${booking.bookngId})}" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Cancel Booking</span></a>
+                            <a th:href="@{/cancel/{bookingList}(bookingList=${bookingList})}" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Cancel Booking</span></a>
                         </div>
                     </div>
                 </div>
@@ -1224,7 +1224,7 @@
 <!--                            </td>-->
                             <td>
                                 <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
+                                    <input type="checkbox" id="select">
                                     <label for="selectAll"></label>
                                 </span>
                             </td>
@@ -1235,8 +1235,8 @@
                             <td th:text="${booking.getPassenger().contact}"></td>
                             <td th:text="${booking.getFlight().getFlightCode()}"></td>
                             <td>
-                                <a th:href="@{/reschedule/{bookingId}(bookingId=${booking.bookngId})}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Reschedule">&#xE254;</i></a>
-                                <a th:href="@{/cancel/{bookingId}(bookingId=${booking.bookngId})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Cancel">&#xE872;</i></a>
+                                <a th:href="@{/reschedule/{bookingId}(bookingId=${booking.getBookingId()})}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Reschedule">&#xE254;</i></a>
+                                <a th:href="@{/cancel/{bookingId}(bookingId=${booking.getBookingId()})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Cancel">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

@@ -11,4 +11,5 @@ public interface PassengerServices {
     void logout(Passenger passenger);
     Passenger updateProfile(Passenger passenger);
     Passenger bookFlight();
+    Passenger getAPassenger(String email,String password);
 }

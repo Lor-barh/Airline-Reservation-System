@@ -629,9 +629,11 @@
 <div class="container-fluid" id="top">
     <!--Card-->
     <div class="card shadow mb-5 bg-white rounded">
+        <form method="post" th:action="@{/searchFlight}" th:object="${flightSearchData}">
         <!--Card-Body-->
         <div class="card-body">
             <!--Card-Title-->
+
             <p class="card-title text-center shadow mb-5 rounded">Travel Booking Form</p>
             <div class="icons text-center">
                 <i class="fa fa-plane fa-2x" aria-hidden="true"></i>
@@ -641,157 +643,70 @@
             <hr>
             <p class="searchText"><strong>Search For Cheap Flights</strong></p>
             <!--First Row-->
-            <div class="row mb-3 mt-3"> <label class="radiobtn"><input type="radio" name="gender" value="male"> One Way</label> <label class="radiobtn"><input type="radio" name="gender" value="male"> Round Trip</label> </div>
+            <div class="row mb-3 mt-3"> <label class="radiobtn"><input type="radio" name="gender" value="male" th:field="*{travelType}" th:value="${T(com.ars.airlinereservationsystem.enums.TravelType).ONE_WAY}"> One Way</label> <label class="radiobtn"><input type="radio" name="gender" value="male" th:field="*{travelType}" th:value="${T(com.ars.airlinereservationsystem.enums.TravelType).RETURN}"> Round Trip</label> </div>
             <!--Second Row-->
             <div class="row">
-                <div class="col-sm-6"> <select class="browser-default custom-select mb-4">
-                    <option value="" disabled="" selected="">From City/Airport</option>
-                    <option value="1">New Delhi</option>
-                    <option value="2">Mumbai</option>
-                    <option value="3">Bangalore</option>
+                <div class="col-sm-6">
+                    <select class="browser-default custom-select mb-4" th:field="*{source}">
+                    <option value="" disabled>From City/Airport</option>
+                        <option th:each="places : ${T(com.ars.airlinereservationsystem.enums.Places).values()}" th:value="${places}" th:text="${places}"></option>
                 </select> </div>
                 <div class="col-sm-6"> <select class="browser-default custom-select mb-4">
-                    <option value="" disabled="" selected="">To City/Airport</option>
-                    <option value="1">New Delhi</option>
-                    <option value="2">Mumbai</option>
-                    <option value="3">Bangalore</option>
+                    <option value="" disabled>To City/Airport</option>
+                    <option th:each="places : ${T(com.ars.airlinereservationsystem.enums.Places).values()}" th:value="${places}" th:text="${places}"></option>
                 </select> </div>
             </div>
             <!--Third Row-->
             <div class="row">
-                <div class="col-sm-6"> <input placeholder="&#xf073; Departing" type="text"  class="form-control datepicker mb-4" style="font-family:Arial, FontAwesome"> </div>
-                <div class="col-sm-6"> <input placeholder="&#xf073; Arriving" type="text"  class="form-control datepicker" style="font-family:Arial, FontAwesome"> </div>
+                <div class="col-sm-6"> <input placeholder="&#xf073; Departing" type="text" th:field="*{travelDate}"  class="form-control datepicker mb-4" style="font-family:Arial, FontAwesome"> </div>
+                <div class="col-sm-6"> <input placeholder="&#xf073; Arriving" type="text" th:field="*{comingBackDate}"  class="form-control datepicker" style="font-family:Arial, FontAwesome"> </div>
             </div>
             <!--Fourth Row-->
             <div class="row mt-4">
-                <div class="col-sm-6"> <select class="browser-default custom-select mb-4" >
+                <div class="col-sm-6"> <select class="browser-default custom-select mb-4" th:field="*{departureTime}">
                     <option value="" disabled="" selected="">Anytime</option>
-                    <option value="1">6:00 AM</option>
-                    <option value="2">3:00 PM</option>
-                    <option value="3">6:00 PM</option>
+                    <option th:value="'6:00 AM'" th:text="'6:00 AM'"></option>
+                    <option th:value="'3:00 PM'" th:text="'3:00 PM'"></option>
+                    <option th:value="'6:00 PM'" th:text="'6:00 PM'"></option>
                 </select> </div>
-                <div class="col-sm-6"> <select class="browser-default custom-select mb-4">
-                    <option value="" disabled="" selected="">Anytime</option>
-                    <option value="1">6:00 AM</option>
-                    <option value="2">3:00 PM</option>
-                    <option value="3">6:00 PM</option>
+                <div class="col-sm-6"> <select class="browser-default custom-select mb-4" th:field="*{returnTime}">
+                    <option value="" disabled>Anytime</option>
+                    <option th:value="'6:00 AM'" th:text="'6:00 AM'"></option>
+                    <option th:value="'3:00 PM'" th:text="'3:00 PM'"></option>
+                    <option th:value="'6:00 PM'" th:text="'6:00 PM'"></option>
                 </select> </div>
             </div>
             <!--Fifth Row-->
             <div class="row">
-                <div class="col-sm-4"> <select class="browser-default custom-select mb-4">
-                    <option value="" disabled="" selected="">Kids(0-14)</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <div class="col-sm-4"> <select class="browser-default custom-select mb-4" th:field="*{noOfKids}">
+                    <option value="" disabled>Kids(0-14)</option>
+                    <option th:value="1" th:text="1"></option>
+                    <option th:value="2" th:text="2"></option>
+                    <option th:value="3" th:text="3"></option>
                 </select> </div>
-                <div class="col-sm-4"> <select class="browser-default custom-select mb-4">
-                    <option value="" disabled="" selected="">Adults(15-64)</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <div class="col-sm-4"> <select class="browser-default custom-select mb-4" th:field="*{noOfAdults}">
+                    <option value="" disabled>Adults(15-64)</option>
+                    <option th:value="1" th:text="1"></option>
+                    <option th:value="2" th:text="2"></option>
+                    <option th:value="3" th:text="3"></option>
                 </select> </div>
-                <div class="col-sm-4"> <select class="browser-default custom-select mb-4" id="select">
-                    <option value="" disabled="" selected="">Seniors(65+)</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <div class="col-sm-4"> <select class="browser-default custom-select mb-4" id="select" th:field="*{noOfSeniors}">
+                    <option value="" disabled>Seniors(65+)</option>
+                    <option th:value="1" th:text="1"></option>
+                    <option th:value="2" th:text="2"></option>
+                    <option th:value="3" th:text="3"></option>
                 </select> </div>
-            </div> <a href="#" class="btn btn-primary float-right mt-5">Find Flights</a>
+            </div>
+            <button type="submit" class="btn btn-primary float-right mt-5">Find Flights</button>
+<!--            <a href="#" class="btn btn-primary float-right mt-5"></a>-->
         </div>
+        </form>
     </div>
 </div>
+<hr>
+<div class="row" style="margin-top: 100px;padding: 30px" >
 
-<!--
-
-<div class="container-fluid" id="lower">
--->
-
-
-<div class="row" style="margin-top: 100px;padding: 30px">
-    <div class="col-sm-6 col-md-3 col-xs-12">
-        <article class="card-x card-big mb15">
-            <div class="card__img-wrap">
-                <img src="https://asfartrip.com/public/upload/top_destinations/FLIGHT-CAI.jpg">
-                <h4 class="title title-overlay-center">Explore Cairo</h4>
-            </div>
-            <div class="card__info">
-                <div class="title-left-wrap">
-                    <h5>London</h5> <small> LON </small>
-                </div>
-                <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
-                <div class="title-right-wrap">
-                    <h5>Cairo</h5> <small>CAI </small>
-                </div>
-            </div> <!--  card__info //  -->
-            <div class="card__pricelist">
-                <div class="cost">
-                    <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/J9.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>20-Jan</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 540</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
-                    </div>
-                </div><!--  cost //  -->
-                <div class="cost">
-                    <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/EK.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>20-Jan</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,150</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
-                    </div>
-                </div><!--  cost //  -->
-                <div class="cost">
-                    <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/MS.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>20-Jan</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,200</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
-                    </div>
-                </div><!--  cost //  -->
-            </div> <!-- card__pricelist // -->
-        </article> <!-- card // -->
-    </div><!-- col // -->
-
-    <div class="col-sm-6 col-md-3 col-xs-12">
-        <article class="card-x card-big mb15">
-            <div class="card__img-wrap">
-                <img src="https://asfartrip.com/public/upload/top_destinations/FLIGHT-BKK.jpg">
-                <h4 class="title title-overlay-center">Explore Bangkok</h4>
-            </div>
-            <div class="card__info">
-                <div class="title-left-wrap">
-                    <h5>London</h5> <small> LON </small>
-                </div>
-                <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
-                <div class="title-right-wrap">
-                    <h5>Bangkok</h5> <small>BKK </small>
-                </div>
-            </div> <!--  card__info //  -->
-            <div class="card__pricelist">
-                <div class="cost">
-                    <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/FZ.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>14-Mar</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,200</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
-                    </div>
-                </div><!--  cost //  -->
-                <div class="cost">
-                    <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/WY.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>20-Jan</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,250</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
-                    </div>
-                </div><!--  cost //  -->
-                <div class="cost">
-                    <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/TG.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>25-Apr</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,500</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
-                    </div>
-                </div><!--  cost //  -->
-            </div> <!-- card__pricelist // -->
-        </article> <!-- card // -->
-    </div><!-- col // -->
-
-    <div class="col-sm-6 col-md-3 col-xs-12">
+    <div class="col-sm-6 col-md-3 col-xs-12" th:each="list : ${flightList}">
         <article class="card-x card-big mb15">
             <div class="card__img-wrap">
                 <img src="https://asfartrip.com/public/upload/top_destinations/FLIGHT-NYC.jpg">
@@ -799,25 +714,25 @@
             </div>
             <div class="card__info">
                 <div class="title-left-wrap">
-                    <h5>London</h5> <small> LON </small>
+                    <h5 th:text="${list.source.getCountry()}"></h5> <small th:text="${list.destination.getCountry()}"></small>
                 </div>
                 <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
                 <div class="title-right-wrap">
-                    <h5>New York</h5> <small>NYC </small>
+                    <h5 th:text="${list.source}"></h5> <small th:text="${list.destination}"></small>
                 </div>
             </div> <!--  card__info //  -->
             <div class="card__pricelist">
                 <div class="cost">
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/SU.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>15-Jun</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,500</var>
+                    <div class="icon-wrap"> <i class="material-icons"></i> <small th:text="${list.travelDate}"></small> </div>
+                    <div class="price-wrap"><var class="price" th:text="${list.price}"><span class="currency">AED</span></var>
                         <a rel="nofollow" target="_blank" href="" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
                 <div class="cost">
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/PS.png"></div>
-                    <div class="icon-wrap"> <i class="material-icons"></i> <small>21-Jul</small> </div>
-                    <div class="price-wrap"><var class="price"><span class="currency">AED</span> 1,520</var>
+                    <div class="icon-wrap"> <i class="material-icons"></i> <small th:text="${list.comingBackDate}"></small> </div>
+                    <div class="price-wrap"><var class="price" th:text="${list.price}"><span class="currency">AED</span> 1,520</var>
                         <a rel="nofollow" target="_blank" href="" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
@@ -832,6 +747,10 @@
         </article> <!-- card // -->
     </div><!-- col // -->
 
+</div>
+<hr>
+<div class="row" style="margin-top: 100px;padding: 30px">
+
     <div class="col-sm-6 col-md-3 col-xs-12" th:each="list: ${listOfFlightsCreated}">
         <article class="card-x card-big mb15">
             <div class="card__img-wrap">
@@ -840,11 +759,11 @@
             </div>
             <div class="card__info">
                 <div class="title-left-wrap">
-                    <h5 >Nigeria</h5> <small th:text="${list.source}"></small>
+                    <h5 th:text="${list.source.getCountry()}"></h5> <small th:text="${list.source}"></small>
                 </div>
                 <span class="icon-center-wrap"><i class="material-icons rotate90"></i></span>
                 <div class="title-right-wrap">
-                    <h5> Nigeria</h5> <small th:text="${list.destination}"></small>
+                    <h5 th:text="${list.destination.getCountry()}"></h5> <small th:text="${list.destination}"></small>
                 </div>
             </div> <!--  card__info //  -->
             <div class="card__pricelist">
@@ -866,7 +785,7 @@
                     <div class="logo-wrap"><img src="https://asfartrip.com/public/assets/images/airline_logo/FZ.png"></div>
                     <div class="icon-wrap"> <i class="material-icons"></i> <small>14-Apr</small> </div>
                     <div class="price-wrap"><var class="price"><span class="currency">AED</span> 900</var>
-                        <a rel="nofollow" target="_blank" href="" class="small">Book</a>
+                        <a rel="nofollow" target="_blank" th:href="@{/book/{flightId}(flightId=${list.getFlightId()})}" class="small">Book</a>
                     </div>
                 </div><!--  cost //  -->
             </div> <!-- card__pricelist // -->
